@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="robots"
+        content="noindex, nofollow"
+    >
+
+    <title>
+        Reply to Patient | Tshireletso Physiotherapist
+    </title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+            background: #f4f7fb;
+            color: #17324d;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 30px 15px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 720px;
+        }
+
+        .card {
+            background: #ffffff;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow:
+                0 10px 35px rgba(0, 0, 0, 0.08);
+        }
+
+        .header {
+            text-align: center;
+            padding: 30px 25px;
+            border-bottom: 1px solid #e5eaf0;
+        }
+
+        .logo {
+            max-width: 220px;
+            width: 100%;
+            height: auto;
+        }
+
+        .content {
+            padding: 35px;
+        }
+
+        h1 {
+            margin: 0 0 8px;
+            font-size: 27px;
+        }
+
+        .subtitle {
+            margin: 0 0 30px;
+            color: #667085;
+            line-height: 1.6;
+            font-size: 14px;
+        }
+
+        .patient-card {
+            background: #f7f9fc;
+            border: 1px solid #e5eaf0;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 25px;
+        }
+
+        .patient-row {
+            margin-bottom: 14px;
+        }
+
+        .patient-row:last-child {
+            margin-bottom: 0;
+        }
+
+        .label {
+            display: block;
+            color: #17324d;
+            font-size: 12px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            margin-bottom: 4px;
+        }
+
+        .value {
+            color: #555;
+            font-size: 14px;
+            word-break: break-word;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #17324d;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            border: 1px solid #d8dee7;
+            border-radius: 8px;
+            padding: 13px 14px;
+            font-family: inherit;
+            font-size: 14px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        input:focus,
+        textarea:focus {
+            border-color: #17324d;
+        }
+
+        textarea {
+            min-height: 190px;
+            resize: vertical;
+            line-height: 1.6;
+        }
+
+        .field {
+            margin-bottom: 20px;
+        }
+
+        .original-message {
+            background: #ffffff;
+            border-left: 4px solid #17324d;
+            padding: 14px 16px;
+            color: #667085;
+            font-size: 13px;
+            line-height: 1.7;
+            margin-top: 8px;
+            margin-bottom: 25px;
+            border-radius: 0 7px 7px 0;
+        }
+
+        .send-button {
+            width: 100%;
+            border: none;
+            border-radius: 8px;
+            padding: 15px 20px;
+            background: #17324d;
+            color: #ffffff;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+
+        .send-button:hover {
+            opacity: 0.9;
+        }
+
+        .send-button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .status {
+            display: none;
+            padding: 13px 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .status.success {
+            display: block;
+            background: #edf8f1;
+            color: #246b3c;
+        }
+
+        .status.error {
+            display: block;
+            background: #fff1f1;
+            color: #a33a3a;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #667085;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 25px 20px;
+            background: #f7f9fc;
+            border-top: 1px solid #e5eaf0;
+        }
+
+        .footer strong {
+            display: block;
+            color: #17324d;
+            margin-bottom: 5px;
+        }
+
+        .footer span {
+            color: #667085;
+            font-size: 12px;
+            line-height: 1.7;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        @media (max-width: 600px) {
+
+            body {
+                padding: 15px;
+            }
+
+            .content {
+                padding: 25px 20px;
+            }
+
+            h1 {
+                font-size: 23px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<div class="container">
+
+    <div class="card">
+
+        <!-- HEADER -->
+
+        <div class="header">
+
+            <img
+                src="/images/logo.png"
+                alt="Tshireletso Physiotherapist"
+                class="logo"
+            >
+
+        </div>
+
+
+        <!-- LOADING -->
+
+        <div
+            id="loading"
+            class="loading"
+        >
+
+            Loading patient information...
+
+        </div>
+
+
+        <!-- MAIN CONTENT -->
+
+        <div
+            id="replyContent"
+            class="content hidden"
+        >
+
+            <h1>
+                Reply to Patient
+            </h1>
+
+            <p class="subtitle">
+
+                Send a professional response directly to the patient.
+
+            </p>
+
+
+            <!-- PATIENT INFORMATION -->
+
+            <div class="patient-card">
+
+                <div class="patient-row">
+
+                    <span class="label">
+                        Patient
+                    </span>
+
+                    <span
+                        id="patientName"
+                        class="value"
+                    ></span>
+
+                </div>
+
+
+                <div class="patient-row">
+
+                    <span class="label">
+                        Email
+                    </span>
+
+                    <span
+                        id="patientEmail"
+                        class="value"
+                    ></span>
+
+                </div>
+
+
+                <div class="patient-row">
+
+                    <span class="label">
+                        Phone
+                    </span>
+
+                    <span
+                        id="patientPhone"
+                        class="value"
+                    ></span>
+
+                </div>
+
+
+                <div class="patient-row">
+
+                    <span class="label">
+                        Treatment
+                    </span>
+
+                    <span
+                        id="patientTreatment"
+                        class="value"
+                    ></span>
+
+                </div>
+
+            </div>
+
+
+            <!-- ORIGINAL MESSAGE -->
+
+            <div id="originalMessageContainer">
+
+                <label>
+                    Patient's Original Message
+                </label>
+
+                <div
+                    id="originalMessage"
+                    class="original-message"
+                ></div>
+
+            </div>
+
+
+            <!-- STATUS -->
+
+            <div
+                id="status"
+                class="status"
+            ></div>
+
+
+            <!-- FORM -->
+
+            <form id="replyForm">
+
+                <div class="field">
+
+                    <label for="subject">
+                        Subject
+                    </label>
+
+                    <input
+                        type="text"
+                        id="subject"
+                        value="Re: Your Appointment Request — Tshireletso Physiotherapist"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="field">
+
+                    <label for="message">
+                        Your Message
+                    </label>
+
+                    <textarea
+                        id="message"
+                        placeholder="Type your message to the patient..."
+                        required
+                    ></textarea>
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="send-button"
+                    id="sendButton"
+                >
+
+                    Send Reply
+
+                </button>
+
+            </form>
+
+        </div>
+
+
+        <!-- FOOTER -->
+
+        <div class="footer">
+
+            <strong>
+                Tshireletso Physiotherapist
+            </strong>
+
+            <span>
+
+                Wellness through personalised care<br>
+
+                +27 62 596 6725<br>
+
+                tshireletsophysio@gmail.com
+
+            </span>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+    const params =
+        new URLSearchParams(window.location.search);
+
+    const token =
+        params.get("token");
+
+
+    const loading =
+        document.getElementById("loading");
+
+    const replyContent =
+        document.getElementById("replyContent");
+
+    const status =
+        document.getElementById("status");
+
+    const form =
+        document.getElementById("replyForm");
+
+    const sendButton =
+        document.getElementById("sendButton");
+
+
+    /* =========================================
+       STATUS MESSAGE
+    ========================================= */
+
+    function showStatus(message, type) {
+
+        status.textContent = message;
+
+        status.className =
+            `status ${type}`;
+
+    }
+
+
+    /* =========================================
+       LOAD PATIENT
+    ========================================= */
+
+    async function loadPatient() {
+
+        if (!token) {
+
+            loading.textContent =
+                "This reply link is invalid.";
+
+            return;
+
+        }
+
+
+        try {
+
+            const response =
+                await fetch(
+                    `/api/reply-details?token=${encodeURIComponent(token)}`
+                );
+
+
+            const data =
+                await response.json();
+
+
+            if (!response.ok || !data.success) {
+
+                loading.textContent =
+                    data.message ||
+                    "This reply link is invalid or has expired.";
+
+                return;
+
+            }
+
+
+            const patient =
+                data.patient;
+
+
+            document.getElementById(
+                "patientName"
+            ).textContent =
+                `${patient.firstName} ${patient.lastName}`;
+
+
+            document.getElementById(
+                "patientEmail"
+            ).textContent =
+                patient.email;
+
+
+            document.getElementById(
+                "patientPhone"
+            ).textContent =
+                patient.phone;
+
+
+            document.getElementById(
+                "patientTreatment"
+            ).textContent =
+                patient.treatment;
+
+
+            const originalMessage =
+                document.getElementById(
+                    "originalMessage"
+                );
+
+
+            if (patient.message) {
+
+                originalMessage.textContent =
+                    patient.message;
+
+            } else {
+
+                originalMessage.textContent =
+                    "No additional message was provided.";
+
+            }
+
+
+            loading.classList.add("hidden");
+
+            replyContent.classList.remove("hidden");
+
+
+        } catch (error) {
+
+            console.error(error);
+
+            loading.textContent =
+                "Unable to load patient information. Please try again.";
+
+        }
+
+    }
+
+
+    /* =========================================
+       SEND REPLY
+    ========================================= */
+
+    form.addEventListener(
+        "submit",
+        async function(event) {
+
+            event.preventDefault();
+
+
+            const subject =
+                document.getElementById(
+                    "subject"
+                ).value.trim();
+
+
+            const message =
+                document.getElementById(
+                    "message"
+                ).value.trim();
+
+
+            if (!message) {
+
+                showStatus(
+                    "Please enter a message before sending.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            sendButton.disabled = true;
+
+            sendButton.textContent =
+                "Sending Reply...";
+
+
+            status.className =
+                "status";
+
+
+            try {
+
+                const response =
+                    await fetch(
+                        "/api/reply",
+                        {
+                            method: "POST",
+
+                            headers: {
+                                "Content-Type":
+                                    "application/json"
+                            },
+
+                            body: JSON.stringify({
+
+                                token: token,
+
+                                subject: subject,
+
+                                message: message
+
+                            })
+
+                        }
+                    );
+
+
+                const data =
+                    await response.json();
+
+
+                if (!response.ok || !data.success) {
+
+                    throw new Error(
+                        data.message ||
+                        "Unable to send reply."
+                    );
+
+                }
+
+
+                showStatus(
+                    "Reply sent successfully to the patient.",
+                    "success"
+                );
+
+
+                document.getElementById(
+                    "message"
+                ).value = "";
+
+
+                sendButton.textContent =
+                    "Reply Sent ✓";
+
+
+            } catch (error) {
+
+                console.error(error);
+
+                showStatus(
+                    error.message ||
+                    "Unable to send the reply.",
+                    "error"
+                );
+
+
+                sendButton.disabled = false;
+
+                sendButton.textContent =
+                    "Send Reply";
+
+            }
+
+        }
+    );
+
+
+    /* =========================================
+       START
+    ========================================= */
+
+    loadPatient();
+
+</script>
+
+</body>
+
+</html>

@@ -50,6 +50,76 @@ navLinks.querySelectorAll("a").forEach(link => {
 const bookingForm = document.getElementById("bookingForm");
 
 
+// =========================
+// APPOINTMENT SUCCESS POPUP
+// =========================
+
+const appointmentModal = document.getElementById("appointmentSuccessModal");
+const closeAppointmentModal = document.getElementById("closeAppointmentModal");
+const closeAppointmentModalButton = document.getElementById("closeAppointmentModalButton");
+const appointmentModalOverlay = document.querySelector(".appointment-modal-overlay");
+
+
+function showAppointmentSuccess() {
+
+    appointmentModal.classList.add("show");
+
+    // Prevent the page from scrolling while popup is open
+    document.body.style.overflow = "hidden";
+
+}
+
+
+function hideAppointmentSuccess() {
+
+    appointmentModal.classList.remove("show");
+
+    // Restore page scrolling
+    document.body.style.overflow = "";
+
+}
+
+
+// Close using X button
+if (closeAppointmentModal) {
+
+    closeAppointmentModal.addEventListener("click", hideAppointmentSuccess);
+
+}
+
+
+// Close using Done button
+if (closeAppointmentModalButton) {
+
+    closeAppointmentModalButton.addEventListener("click", hideAppointmentSuccess);
+
+}
+
+
+// Close by clicking outside the popup
+if (appointmentModalOverlay) {
+
+    appointmentModalOverlay.addEventListener("click", hideAppointmentSuccess);
+
+}
+
+
+// Close popup with Escape key
+document.addEventListener("keydown", (event) => {
+
+    if (event.key === "Escape") {
+
+        hideAppointmentSuccess();
+
+    }
+
+});
+
+
+// =========================
+// SUBMIT APPOINTMENT
+// =========================
+
 bookingForm.addEventListener("submit", async (event) => {
 
     event.preventDefault();
@@ -98,11 +168,31 @@ bookingForm.addEventListener("submit", async (event) => {
         console.log("Server response:", result);
 
 
+        // =========================
+        // SUCCESS
+        // =========================
+
         if (result.success) {
 
-            alert("Your appointment request has been received.");
-
+            // Clear the form
             bookingForm.reset();
+
+            // Show professional success popup
+            showAppointmentSuccess();
+
+        }
+
+
+        // =========================
+        // SERVER ERROR
+        // =========================
+
+        else {
+
+            alert(
+                result.message ||
+                "We could not submit your appointment request. Please try again."
+            );
 
         }
 
@@ -110,7 +200,9 @@ bookingForm.addEventListener("submit", async (event) => {
 
         console.error("ERROR:", error);
 
-        alert("Something went wrong. Please try again.");
+        alert(
+            "Something went wrong. Please check your internet connection and try again."
+        );
 
     }
 
@@ -134,7 +226,9 @@ window.addEventListener("load", () => {
         loader.classList.add("hide");
 
         setTimeout(() => {
+
             welcomePopup.classList.add("show");
+
         }, 500);
 
     }, 1200);
@@ -144,7 +238,9 @@ window.addEventListener("load", () => {
 
 // Close welcome popup
 welcomeClose.addEventListener("click", () => {
+
     welcomePopup.classList.remove("show");
+
 });
 
 
@@ -152,7 +248,9 @@ welcomeClose.addEventListener("click", () => {
 welcomePopup.addEventListener("click", (event) => {
 
     if (event.target === welcomePopup) {
+
         welcomePopup.classList.remove("show");
+
     }
 
 });
